@@ -3,16 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Trivikram Peddiraju — Portfolio & Blog</title>
+  <title>Trivikram Peddiraju — Portfolio</title>
+  <meta name="description" content="Entry-level Software Engineer — Java, Spring Boot, React, AWS/Azure, and beginner AI projects.">
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
   <header class="site-header">
     <h1>Trivikram Peddiraju</h1>
-    <p class="tagline">Entry-Level Software Engineer • Java • React • AWS/Azure • Learning AI</p>
+    <p class="tagline">Entry-Level Software Engineer • Java • Spring Boot • React • AWS/Azure</p>
+
+    <!-- Resume button (upload docs/Trivikram_Peddiraju_Resume.pdf first) -->
+    <p style="margin:10px 0 0;">
+      <a href="Trivikram_Peddiraju_Resume.pdf" target="_blank" rel="noopener"
+         style="padding:8px 12px; border:1px solid #ccc; border-radius:8px; text-decoration:none;">
+        View Resume (PDF)
+      </a>
+    </p>
+
     <nav>
       <a href="#about">About</a>
-      <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
       <a href="#blog">Blog</a>
       <a href="#contact">Contact</a>
@@ -23,36 +32,31 @@
     <section id="about">
       <h2>About</h2>
       <p>
-        Hi! I’m Trivikram, a software developer based in Massachusetts. I’m building my first portfolio + blog
-        to learn coding step-by-step and share what I’m learning — Java, Spring Boot, React.js, CI/CD, Docker,
-        and cloud (AWS & Azure).
+        I’m Trivikram, an entry-level Software Engineer. I build simple full-stack apps with
+        <strong>Java/Spring Boot</strong> and <strong>React</strong>, and deploy to <strong>AWS/Azure</strong>.
+        I’m learning AI basics and adding small features to my projects as I go.
       </p>
-    </section>
-
-    <section id="skills">
-      <h2>Skills</h2>
-      <ul class="pill-list">
-        <li>Java</li><li>Python</li><li>JavaScript</li>
-        <li>React.js</li><li>Spring Boot</li><li>REST APIs</li>
-        <li>MySQL</li><li>PostgreSQL</li><li>MongoDB</li>
-        <li>Docker</li><li>GitHub Actions</li><li>Jenkins</li>
-        <li>AWS</li><li>Azure</li><li>Linux</li>
-      </ul>
     </section>
 
     <section id="projects">
       <h2>Projects</h2>
+
       <article>
-        <h3>AI-Powered To-Do (Coming Soon)</h3>
-        <p>Full-stack app where an AI helper suggests priorities and titles for tasks.</p>
+        <h3>Notes API (Spring Boot)</h3>
+        <p>CRUD REST API for notes with Postman tests. (Simple, clear, focused.)</p>
+        <!-- If the repo exists, keep this link. If not, remove this paragraph for now. -->
+        <p><a href="https://github.com/TrivikramPeddiraju-Hub/spring-boot-notes-api" target="_blank" rel="noopener">View Repo</a></p>
       </article>
+
       <article>
-        <h3>Spring Boot REST API (Starter)</h3>
-        <p>Simple CRUD API to learn fundamentals.</p>
+        <h3>Portfolio + Blog</h3>
+        <p>This site documenting my learning journey.</p>
+        <p><a href="https://trivikrampeddiraju-hub.github.io/Portfolio/" target="_blank" rel="noopener">Live</a></p>
       </article>
+
       <article>
-        <h3>Portfolio + Blog (This Site)</h3>
-        <p>Static site hosted on GitHub Pages.</p>
+        <h3>AI To-Do (In Progress)</h3>
+        <p>React + Spring Boot app; AI suggests task titles and priorities.</p>
       </article>
     </section>
 
@@ -61,25 +65,29 @@
       <ul id="blog-list"></ul>
       <article id="blog-post" class="hidden">
         <h3 id="post-title"></h3>
-        <p id="post-date"></p>
+        <p id="post-date" class="meta"></p>
         <div id="post-content"></div>
-        <a href="#blog" id="back-to-list">← Back to list</a>
+        <p><a href="#blog" id="back-to-list">← Back to list</a></p>
       </article>
+      <!-- Tip: if you don’t want a blog yet, you can temporarily hide this whole section
+           by wrapping it in <!-- and --> comments. -->
     </section>
 
     <section id="contact">
       <h2>Contact</h2>
       <p>Email: <a href="mailto:Trivikrampeddiraju.7@gmail.com">Trivikrampeddiraju.7@gmail.com</a></p>
-      <p>GitHub: <a href="#">Add your GitHub link here</a></p>
-      <p>LinkedIn: <a href="#">Add your LinkedIn link here</a></p>
+      <p>GitHub: <a href="https://github.com/TrivikramPeddiraju-Hub" target="_blank" rel="noopener">github.com/TrivikramPeddiraju-Hub</a></p>
+      <p>LinkedIn: <a href="www.linkedin.com/in/trivikram-p-a9621736b" target="_blank" rel="noopener">linkedin.com/in/YOUR-HANDLE</a></p>
     </section>
   </main>
 
   <footer class="site-footer">
-    <small>© <span id="year"></span> Trivikram Peddiraju</small>
+    <small>© <span id="year"></span> Trivikram Peddiraju • Built with vanilla JS</small>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
+
+
