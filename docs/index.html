@@ -1,92 +1,508 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Trivikram Peddiraju — Portfolio</title>
-  <meta name="description" content="Entry-level Software Engineer — Java, Spring Boot, React, AWS/Azure, and beginner AI projects.">
-  <link rel="stylesheet" href="style.css"/>
+  <meta name="description" content="Portfolio of Trivikram Peddiraju — Software Developer, Full‑Stack Engineer, Cloud (AWS & Azure)." />
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* ===== Theme ===== */
+    :root {
+      --bg:#0b0c10; --panel:#111318; --card:#0f1117;
+      --text:#eef2f7; --muted:#94a3b8; --border:#202736; --accent:#5eead4;
+    }
+    html,body{height:100%}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+      line-height:1.6;
+    }
+    .container{ width:min(1120px,92%); margin:0 auto; }
+    h1,h2,h3{ margin:0 0 14px; }
+    p{ margin:0 0 10px; }
+    a{ color:inherit; text-decoration:none; }
+    a:focus-visible, button:focus-visible { outline:3px solid #60a5fa; outline-offset:3px; border-radius:10px; }
+
+    /* ===== Header / Nav ===== */
+    header{
+      position:sticky; top:0; z-index:50;
+      background:rgba(11,12,16,0.7); backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav{ display:flex; align-items:center; justify-content:space-between; padding:14px 0; }
+    .brand{ display:flex; align-items:center; gap:.65rem; font-weight:800; letter-spacing:.2px; }
+    .dot{ width:10px; height:10px; border-radius:50%; background:var(--accent); box-shadow:0 0 18px var(--accent); }
+    .brand a{ white-space:nowrap; }
+    .menu{ display:flex; gap:.6rem; flex-wrap:wrap; }
+    .menu a{ padding:.5rem .75rem; border-radius:10px; border:1px solid transparent; opacity:.9; }
+    .menu a:hover{ border-color:var(--border); background:var(--panel); }
+
+    /* ===== Generic UI ===== */
+    section{ padding:56px 0; }
+    .card{
+      background:var(--panel); border:1px solid var(--border); border-radius:18px;
+      padding:18px 20px; box-shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+    .grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .muted{ color:var(--muted); }
+    .badge{
+      display:inline-block; padding:.35rem .7rem; border:1px solid var(--border);
+      border-radius:999px; background:var(--card); color:var(--muted); font-size:.9rem;
+    }
+    .badges{ display:flex; gap:.6rem; flex-wrap:wrap; }
+
+    /* ===== Hero ===== */
+    .hero{ padding:72px 0 24px; }
+    .hero-hi{
+      font-size: clamp(1.4rem, 2.6vw, 2rem);
+      font-weight: 700;
+      margin: 0 0 .2rem;
+    }
+    .hero-name{
+      font-size: clamp(2.6rem, 8.5vw, 4.8rem);
+      line-height: 1.05; letter-spacing: .2px; margin: 0 0 .4rem; font-weight: 800;
+    }
+    .hero-name span{ color: var(--accent); }
+    .hero-roles{
+      font-size: clamp(1.2rem, 3vw, 2rem); font-weight: 600; color: var(--text); margin: 0 0 .6rem;
+    }
+    .hero-roles .pipe{ margin: 0 .5rem; opacity: .8; }
+    .hero-summary{ font-size: clamp(.95rem, 1.4vw, 1.05rem); max-width: 70ch; }
+
+    /* ===== Contact Icon Buttons ===== */
+    .contact-icons{ display:flex; gap:15px; flex-wrap:wrap; }
+    .contact-icons a{
+      --bgc:#000;
+      display:inline-flex; align-items:center; justify-content:center;
+      width:60px; height:60px; border-radius:50%;
+      color:#fff; font-size:26px; box-shadow:0 6px 16px rgba(0,0,0,.35);
+      background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--bgc) 85%, #ffffff 15%) 0%, var(--bgc) 60%);
+      animation: pulseInside 2.2s ease-in-out infinite;
+      transition: transform .2s ease;
+    }
+    .contact-icons a:hover{ transform:scale(1.08); }
+    .email   { --bgc:#EA4335; }
+    .linkedin{ --bgc:#0A66C2; }
+    .github  { --bgc:#181717; }
+    .phone   { --bgc:#25D366; }
+    @keyframes pulseInside{ 0%{ filter:brightness(1);} 50%{ filter:brightness(1.12);} 100%{ filter:brightness(1);} }
+
+    /* ===== CTA ===== */
+    .cta-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top:16px; }
+    .download-btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:14px 24px; border-radius:999px; font-weight:700; font-size:1rem;
+      color:#0b0c10; background:linear-gradient(135deg,#5eead4,#60a5fa);
+      border:0; text-decoration:none; box-shadow:0 8px 24px rgba(96,165,250,.35);
+      transition:transform .2s ease, box-shadow .3s ease, filter .2s ease;
+    }
+    .download-btn:hover{ transform:translateY(-1px) scale(1.03); box-shadow:0 12px 32px rgba(96,165,250,.5); filter:brightness(1.05); }
+    .download-btn i{ font-size:1.1rem; }
+    .download-btn.pulse{ position:relative; isolation:isolate; }
+    .download-btn.pulse::after{
+      content:""; position:absolute; inset:-2px; border-radius:inherit; z-index:-1;
+      background: radial-gradient(60% 60% at 50% 50%, rgba(96,165,250,.55), rgba(94,234,212,.2) 60%, transparent 70%);
+      filter:blur(10px); animation: glow 2.2s ease-in-out infinite;
+    }
+    @keyframes glow{ 0%{opacity:.6; transform:scale(1);} 50%{opacity:.95; transform:scale(1.03);} 100%{opacity:.6; transform:scale(1);} }
+
+    /* ===== Timeline ===== */
+    .timeline{ display:flex; flex-direction:column; gap:12px; }
+    .timeline-item{
+      display:grid; grid-template-columns:160px 1fr; gap:18px;
+      background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:16px;
+    }
+    .pill{ display:inline-block; font-size:.8rem; padding:.22rem .5rem; border-radius:999px; border:1px solid var(--border); background:var(--card); color:var(--muted); }
+    .item-title{ margin:0 0 6px; font-size:1.05rem; }
+    .item-org{ font-weight:600; }
+
+    /* ===== Projects ===== */
+    .project{
+      display:flex; flex-direction:column; gap:.6rem; padding:16px;
+      border:1px solid var(--border); border-radius:14px; background:var(--panel);
+    }
+    .project h3{ margin:0; font-size:1.05rem; }
+    .tags{ display:flex; flex-wrap:wrap; gap:.4rem; }
+    .tag-sm{ font-size:.75rem; padding:.2rem .45rem; border-radius:999px; border:1px solid var(--border); color:var(--muted); background:var(--card); }
+
+    /* ===== Contact ===== */
+    .contact-grid{ display:grid; grid-template-columns:1.1fr 1fr; gap:22px; }
+    .info-list{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px; }
+    .info-list li{ display:flex; gap:12px; align-items:flex-start; }
+    .circle.icn{ width:44px; height:44px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; background:#1e293b; color:#cbd5e1; font-size:18px; box-shadow:0 4px 16px rgba(0,0,0,.25); }
+    .label{ font-weight:600; }
+    .contact-form{ display:flex; flex-direction:column; gap:12px; }
+    .contact-form .row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .field{ display:flex; flex-direction:column; gap:6px; }
+    .field label{ font-size:.95rem; color:#cbd5e1; }
+    .field input, .field textarea{ background:#0f1117; color:#eef2f7; border:1px solid #202736; border-radius:12px; padding:12px 14px; outline:none; transition:border .2s, box-shadow .2s; }
+    .field input:focus, .field textarea:focus{ border-color:#6366f1; box-shadow:0 0 0 3px rgba(99,102,241,.25); }
+    .send-btn{ width:100%; border:0; padding:14px 16px; border-radius:999px; font-weight:700; color:#0b0c10; background:linear-gradient(135deg,#8b5cf6,#60a5fa); box-shadow:0 8px 24px rgba(96,165,250,.35); cursor:pointer; transition:filter .3s ease; }
+    .send-btn:hover{ filter:brightness(1.05); }
+
+    /* ===== Footer ===== */
+    footer{ padding:38px 0 60px; color:var(--muted); border-top:1px solid var(--border); }
+
+    /* ===== Responsive ===== */
+    @media (max-width:1080px){ .brand a{ white-space:normal; } }
+    @media (max-width:980px){ .grid-3{ grid-template-columns:1fr 1fr } .timeline-item{ grid-template-columns:1fr } }
+    @media (max-width:900px){ .contact-grid{ grid-template-columns:1fr } .contact-form .row{ grid-template-columns:1fr } }
+    @media (max-width:640px){ .menu{ display:none } .grid-3,.grid-2{ grid-template-columns:1fr } }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){ .contact-icons a, .download-btn.pulse::after{ animation: none; } .download-btn{ transition: none; } }
+
+    /* Social icon colors */
+    .contact-icons a.email i{ color:#D44638; }
+    .contact-icons a.linkedin i{ color:#0077B5; }
+    .contact-icons a.github i{ color:#ffffff; background-color:#000; border-radius:50%; padding:8px; }
+    .contact-icons a.phone i{ color:#34A853; }
+    .contact-icons a:hover i{ opacity:.8; transform:scale(1.1); transition:all .2s ease-in-out; }
+
+    /* ===== Skills Icon Grid ===== */
+    .skills-wrap { margin-top: 10px; }
+    .skills-grid{ display:grid; grid-template-columns: repeat(7, minmax(120px,1fr)); gap:18px; }
+    .skill-card{ background: linear-gradient(180deg, #0f1117, #0d0f14); border:1px solid var(--border); border-radius:16px; padding:18px 12px; display:flex; flex-direction:column; align-items:center; justify-content:center; box-shadow: 0 10px 24px rgba(0,0,0,.25); transition: transform .18s ease, box-shadow .25s ease, border-color .18s ease; }
+    .skill-card:hover{ transform: translateY(-4px); border-color: color-mix(in srgb, var(--accent) 40%, var(--border)); box-shadow: 0 14px 28px rgba(0,0,0,.35); }
+    .skill-icon{ font-size:36px; line-height:1; margin-bottom:10px; }
+    .skill-name{ font-weight:600; font-size:.95rem; color:var(--text); text-align:center; }
+    .c-blue{ color:#60a5fa; } .c-green{ color:#22c55e; } .c-yellow{ color:#facc15; } .c-red{ color:#ef4444; } .c-orange{ color:#f59e0b; } .c-pink{ color:#f472b6; } .c-teal{ color:#2dd4bf; } .c-purple{ color:#a78bfa; } .c-white{ color:#e5e7eb; } .c-azure{ color:#0EA5E9; } .c-gray{ color:#94a3b8; }
+    @media (max-width:1100px){ .skills-grid{ grid-template-columns: repeat(5, minmax(120px,1fr)); } }
+    @media (max-width:800px){  .skills-grid{ grid-template-columns: repeat(4, minmax(120px,1fr)); } }
+    @media (max-width:600px){  .skills-grid{ grid-template-columns: repeat(3, minmax(110px,1fr)); } }
+    @media (max-width:420px){  .skills-grid{ grid-template-columns: repeat(2, minmax(110px,1fr)); } }
+  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
 </head>
 <body>
-  <header class="site-header">
-    <h1>Trivikram Peddiraju</h1>
-    <p class="tagline">Entry-Level Software Engineer • Java • Spring Boot • React • AWS/Azure</p>
-
-    <!-- Resume button (upload docs/Trivikram_Peddiraju_Resume.pdf first) -->
-    <p style="margin:10px 0 0;">
-      <a href="Trivikram_Peddiraju_Resume.pdf" target="_blank" rel="noopener"
-         style="padding:8px 12px; border:1px solid #ccc; border-radius:8px; text-decoration:none;">
-        View Resume (PDF)
-      </a>
-    </p>
-
-    <nav>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#blog">Blog</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <!-- ===== Header ===== -->
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <a href="#home">Trivikram Peddiraju</a>
+      </div>
+      <nav class="menu" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
   <main>
+    <!-- ===== Hero ===== -->
+    <section id="home" class="hero">
+      <div class="container">
+        <h1 class="hero-hi">Hi, I’m</h1>
+        <h1 class="hero-name"><span>Trivikram Peddiraju</span></h1>
+        <div class="hero-roles" aria-label="Roles">
+          Software Developer <span class="pipe">|</span>
+          Full‑Stack Engineer <span class="pipe">|</span>
+          AWS & Azure
+        </div>
+        <p class="muted hero-summary">
+          Software Developer with 3+ years’ experience designing, testing, and deploying scalable full‑stack applications on
+          <strong>AWS</strong> and <strong>Azure</strong>. I build Java/Spring Boot APIs, React.js front ends, and ship reliably
+          using CI/CD (Jenkins, GitHub Actions, Azure DevOps). I’m comfortable with Dockerized microservices, automated
+          testing, and debugging.
+        </p>
+        <div class="contact-icons" style="margin-top:12px">
+          <a href="mailto:Trivikrampeddiraju.7@gmail.com" target="_blank" class="email" title="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+          <a href="https://www.linkedin.com/in/trivikram-p-a9621736b" target="_blank" class="linkedin" title="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+          <a href="https://github.com/TrivikramPeddiraju-Hub" target="_blank" class="github" title="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+          <a href="tel:+12063076740" class="phone" title="Phone"><i class="fas fa-phone" aria-hidden="true"></i></a>
+        </div>
+        <div class="cta-row">
+          <!-- Update this href to your hosted PDF path/name -->
+          <a href="TrivikramPeddiraju_CV.pdf" class="download-btn pulse" download>
+            <i class="fas fa-download" aria-hidden="true"></i> Download Resume
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== About ===== -->
     <section id="about">
-      <h2>About</h2>
-      <p>
-        I’m Trivikram, an entry-level Software Engineer. I build simple full-stack apps with
-        <strong>Java/Spring Boot</strong> and <strong>React</strong>, and deploy to <strong>AWS/Azure</strong>.
-        I’m learning AI basics and adding small features to my projects as I go.
-      </p>
+      <div class="container">
+        <h2>About <span style="color:#64FAF5">me</span></h2>
+        <div class="grid-2">
+          <div class="card">
+            <p>
+              I’m a hands‑on Software Developer who enjoys crafting clean APIs, polished UIs, and smooth delivery pipelines.
+              Recent work includes building full‑stack apps on AWS & Azure, implementing CI/CD with Jenkins/Azure DevOps,
+              and containerizing Java microservices with Docker.
+            </p>
+            <p class="muted" style="margin-top:14px">
+              Tooling I reach for often: Spring Boot, React.js, MySQL/PostgreSQL, Docker, GitHub Actions, and Linux.
+            </p>
+          </div>
+          <div class="card">
+            <h3 style="margin:4px 0 12px">Focus Areas</h3>
+            <div class="badges">
+              <span class="badge">Full‑Stack Development</span>
+              <span class="badge">REST APIs</span>
+              <span class="badge">CI/CD Automation</span>
+              <span class="badge">Cloud (AWS/Azure)</span>
+              <span class="badge">Containers</span>
+              <span class="badge">Automated Testing</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
+    <!-- ===== Skills ===== -->
+    <section id="skills">
+      <div class="container">
+        <h2>Skills</h2>
+        <div class="skills-wrap">
+          <div class="skills-grid">
+            <!-- Row 1 -->
+            <div class="skill-card"><i class="devicon-java-plain skill-icon c-red"></i><div class="skill-name">Java</div></div>
+            <div class="skill-card"><i class="devicon-spring-plain skill-icon c-green"></i><div class="skill-name">Spring Boot</div></div>
+            <div class="skill-card"><i class="devicon-javascript-plain skill-icon c-yellow"></i><div class="skill-name">JavaScript</div></div>
+            <div class="skill-card"><i class="devicon-typescript-plain skill-icon c-blue"></i><div class="skill-name">TypeScript</div></div>
+            <div class="skill-card"><i class="devicon-react-original skill-icon c-azure"></i><div class="skill-name">React.js</div></div>
+            <div class="skill-card"><i class="devicon-nodejs-plain skill-icon c-green"></i><div class="skill-name">Node.js</div></div>
+            <div class="skill-card"><i class="devicon-express-original skill-icon c-gray"></i><div class="skill-name">Express</div></div>
+            <!-- Row 2 -->
+            <div class="skill-card"><i class="devicon-html5-plain skill-icon c-orange"></i><div class="skill-name">HTML5</div></div>
+            <div class="skill-card"><i class="devicon-css3-plain skill-icon c-blue"></i><div class="skill-name">CSS3</div></div>
+            <div class="skill-card"><i class="devicon-mysql-plain skill-icon c-yellow"></i><div class="skill-name">MySQL</div></div>
+            <div class="skill-card"><i class="devicon-postgresql-plain skill-icon c-azure"></i><div class="skill-name">PostgreSQL</div></div>
+            <div class="skill-card"><i class="devicon-mongodb-plain skill-icon c-green"></i><div class="skill-name">MongoDB</div></div>
+            <div class="skill-card"><i class="devicon-aws-plain skill-icon c-yellow"></i><div class="skill-name">AWS</div></div>
+            <div class="skill-card"><i class="devicon-azure-plain skill-icon c-blue"></i><div class="skill-name">Azure</div></div>
+            <!-- Row 3 -->
+            <div class="skill-card"><i class="devicon-docker-plain skill-icon c-blue"></i><div class="skill-name">Docker</div></div>
+            <div class="skill-card"><i class="devicon-git-plain skill-icon c-orange"></i><div class="skill-name">Git</div></div>
+            <div class="skill-card"><i class="devicon-github-original skill-icon c-white"></i><div class="skill-name">GitHub</div></div>
+            <div class="skill-card"><i class="devicon-gitlab-plain skill-icon c-orange"></i><div class="skill-name">GitLab</div></div>
+            <div class="skill-card"><i class="devicon-jenkins-plain skill-icon c-red"></i><div class="skill-name">Jenkins</div></div>
+            <div class="skill-card"><i class="devicon-azuredevops-plain skill-icon c-blue"></i><div class="skill-name">Azure DevOps</div></div>
+            <div class="skill-card"><i class="devicon-apachemaven-plain skill-icon c-purple"></i><div class="skill-name">Maven</div></div>
+            <!-- Row 4 -->
+            <div class="skill-card"><i class="devicon-gradle-plain skill-icon c-green"></i><div class="skill-name">Gradle</div></div>
+            <div class="skill-card"><i class="devicon-linux-plain skill-icon c-gray"></i><div class="skill-name">Linux</div></div>
+            <div class="skill-card"><i class="devicon-windows8-original skill-icon c-blue"></i><div class="skill-name">Windows</div></div>
+            <div class="skill-card"><i class="devicon-junit-plain skill-icon c-green"></i><div class="skill-name">JUnit</div></div>
+            <div class="skill-card"><i class="devicon-selenium-original skill-icon c-green"></i><div class="skill-name">Selenium</div></div>
+            <div class="skill-card"><i class="fa-solid fa-flask skill-icon c-pink"></i><div class="skill-name">Postman</div></div>
+            <div class="skill-card"><i class="devicon-bash-plain skill-icon c-gray"></i><div class="skill-name">Bash</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Experience ===== -->
+    <section id="experience">
+      <div class="container">
+        <h2>Experience</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div><span class="pill">Jun 2024 – Present</span></div>
+            <div>
+              <p class="item-title"><span class="item-org">GUCONS Consulting Pvt Ltd</span> · Software Developer · Dallas, US</p>
+              <ul class="muted" style="margin:0 0 0 18px">
+                <li>Built and launched full‑stack applications on AWS & Azure with React.js front ends.</li>
+                <li>Implemented CI/CD pipelines with Jenkins and Azure DevOps to automate builds, testing, and deployments.</li>
+                <li>Containerized Java microservices with Docker; managed environments via Docker Compose & Vagrant.</li>
+                <li>Tested backend services with Selenium & Postman to ensure reliability and performance.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div><span class="pill">Jan 2021 – Aug 2022</span></div>
+            <div>
+              <p class="item-title"><span class="item-org">CrogiEs Global Pvt Ltd</span> · Junior Software Developer · Hyderabad, India</p>
+              <ul class="muted" style="margin:0 0 0 18px">
+                <li>Developed RESTful services using Java Spring Boot; integrated MySQL/PostgreSQL databases.</li>
+                <li>Built responsive UIs with React.js, HTML5, CSS3, Bootstrap, and jQuery.</li>
+                <li>Collaborated in Agile sprints using Git/GitHub for version control and JIRA for tracking.</li>
+                <li>Improved code quality with automated tests using JUnit and Postman.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Projects ===== -->
     <section id="projects">
-      <h2>Projects</h2>
-
-      <article>
-        <h3>Notes API (Spring Boot)</h3>
-        <p>CRUD REST API for notes with Postman tests. (Simple, clear, focused.)</p>
-        <!-- If the repo exists, keep this link. If not, remove this paragraph for now. -->
-        <p><a href="https://github.com/TrivikramPeddiraju-Hub/spring-boot-notes-api" target="_blank" rel="noopener">View Repo</a></p>
-      </article>
-
-      <article>
-        <h3>Portfolio + Blog</h3>
-        <p>This site documenting my learning journey.</p>
-        <p><a href="https://trivikrampeddiraju-hub.github.io/Portfolio/" target="_blank" rel="noopener">Live</a></p>
-      </article>
-
-      <article>
-        <h3>AI To-Do (In Progress)</h3>
-        <p>React + Spring Boot app; AI suggests task titles and priorities.</p>
-      </article>
+      <div class="container">
+        <h2>Projects</h2>
+        <div class="grid-3">
+          <div class="project">
+            <h3>E‑Commerce Website (Backend Developer)</h3>
+            <p class="muted">Built backend components for an e‑commerce platform (1Stop.ai, IIT Kanpur associated): product listings, auth, and order management.</p>
+            <div class="tags">
+              <span class="tag-sm">Java</span>
+              <span class="tag-sm">Angular</span>
+              <span class="tag-sm">REST APIs</span>
+            </div>
+          </div>
+          <div class="project">
+            <h3>Cybersecurity & Malware Analysis</h3>
+            <p class="muted">Internship focused on fundamentals: phishing, keyloggers, XSS, rootkits; performed malware analysis and mitigation techniques.</p>
+            <div class="tags">
+              <span class="tag-sm">Security</span>
+              <span class="tag-sm">Analysis</span>
+              <span class="tag-sm">Mitigation</span>
+            </div>
+          </div>
+          <div class="project">
+            <h3>Licence Plate Recognition (Publication)</h3>
+            <p class="muted">Published in IRJET (Vol 9, Issue 1): “Licence Plate Recognition using Supervised Learning and Deep Learning”.</p>
+            <div class="tags">
+              <span class="tag-sm">Computer Vision</span>
+              <span class="tag-sm">Deep Learning</span>
+              <span class="tag-sm">IRJET</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="blog">
-      <h2>Blog</h2>
-      <ul id="blog-list"></ul>
-      <article id="blog-post" class="hidden">
-        <h3 id="post-title"></h3>
-        <p id="post-date" class="meta"></p>
-        <div id="post-content"></div>
-        <p><a href="#blog" id="back-to-list">← Back to list</a></p>
-      </article>
-      <!-- Tip: if you don’t want a blog yet, you can temporarily hide this whole section
-           by wrapping it in <!-- and --> comments. -->
+    <!-- ===== Education ===== -->
+    <section id="education">
+      <div class="container">
+        <h2>Education</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div><span class="pill">May 2024</span></div>
+            <div>
+              <p class="item-title"><span class="item-org">Rivier University</span> · Master of Science in Computer Science · Nashua, NH</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div><span class="pill">Apr 2022</span></div>
+            <div>
+              <p class="item-title"><span class="item-org">GITAM University</span> · Bachelor of Science in Information Technology · Visakhapatnam, India</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
+    <!-- ===== Certifications ===== -->
+    <section id="certs">
+      <div class="container">
+        <h2>Certifications</h2>
+        <div class="grid-3">
+          <div class="card">
+            <h3 style="margin:0 0 8px">Microsoft Azure Administrator Associate</h3>
+            <p class="muted">Credential: Active</p>
+          </div>
+          <div class="card">
+            <h3 style="margin:0 0 8px">AWS Certified Developer — Associate</h3>
+            <p class="muted">Credential: Active</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
     <section id="contact">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:Trivikrampeddiraju.7@gmail.com">Trivikrampeddiraju.7@gmail.com</a></p>
-      <p>GitHub: <a href="https://github.com/TrivikramPeddiraju-Hub" target="_blank" rel="noopener">github.com/TrivikramPeddiraju-Hub</a></p>
-      <p>LinkedIn: <a href="www.linkedin.com/in/trivikram-p-a9621736b" target="_blank" rel="noopener">linkedin.com/in/YOUR-HANDLE</a></p>
+      <div class="container">
+        <h2>Get In <span style="color:#64FAF5">Touch</span></h2>
+        <div class="contact-grid">
+          <!-- Left: Contact Information -->
+          <div class="card">
+            <h3 style="margin:0 0 6px">Contact Information</h3>
+            <p class="muted" style="margin:0 0 16px">Open to full‑time and contract opportunities. Let’s connect!</p>
+            <ul class="info-list contact-text">
+              <li>
+                <span class="circle icn"><i class="fas fa-location-dot" aria-hidden="true"></i></span>
+                <div>
+                  <div class="label">Location</div>
+                  <div class="muted">Framingham, Massachusetts</div>
+                </div>
+              </li>
+              <li>
+                <span class="circle icn"><i class="fas fa-envelope" aria-hidden="true"></i></span>
+                <div>
+                  <div class="label">Email</div>
+                  <div class="muted">Trivikrampeddiraju.7@gmail.com</div>
+                </div>
+              </li>
+              <li>
+                <span class="circle icn"><i class="fas fa-phone" aria-hidden="true"></i></span>
+                <div>
+                  <div class="label">Phone</div>
+                  <div class="muted">+1 (206) 307‑6740</div>
+                </div>
+              </li>
+              <li>
+                <span class="circle icn"><i class="fas fa-user-check" aria-hidden="true"></i></span>
+                <div>
+                  <div class="label">Available For</div>
+                  <div class="muted">Full‑time roles, Contract</div>
+                </div>
+              </li>
+            </ul>
+            <div style="margin-top:18px">
+              <div class="label" style="margin-bottom:8px">Connect With Me</div>
+              <div class="contact-icons">
+                <a href="mailto:Trivikrampeddiraju.7@gmail.com" target="_blank" class="email" title="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+                <a href="https://www.linkedin.com/in/trivikram-p-a9621736b" target="_blank" class="linkedin" title="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                <a href="https://github.com/TrivikramPeddiraju-Hub" target="_blank" class="github" title="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+                <a href="tel:+12063076740" class="phone" title="Phone"><i class="fas fa-phone" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Contact Form -->
+          <div class="card">
+            <h3 style="margin:0 0 6px">Send Me a Message</h3>
+            <!-- Replace with your real Formspree ID -->
+            <form id="contactForm" action="https://formspree.io/f/your_form_id" method="POST" class="contact-form">
+              <div class="row">
+                <div class="field">
+                  <label for="name">Your Name</label>
+                  <input id="name" type="text" name="name" required />
+                </div>
+                <div class="field">
+                  <label for="email">Your Email</label>
+                  <input id="email" type="email" name="email" required />
+                </div>
+              </div>
+              <div class="field">
+                <label for="subject">Subject</label>
+                <input id="subject" type="text" name="subject" />
+              </div>
+              <div class="field">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="6" required></textarea>
+              </div>
+              <button type="submit" class="send-btn">Send Message&nbsp;<i class="fas fa-paper-plane" aria-hidden="true"></i></button>
+            </form>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <small>© <span id="year"></span> Trivikram Peddiraju • Built with vanilla JS</small>
+  <footer>
+    <div class="container">
+      © <span id="year"></span> Trivikram Peddiraju · Built with HTML/CSS · Deployed on GitHub Pages
+    </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="script.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
 
