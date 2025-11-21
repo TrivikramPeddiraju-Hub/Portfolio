@@ -17,6 +17,16 @@
       --bg:#0b0c10; --panel:#111318; --card:#0f1117;
       --text:#eef2f7; --muted:#94a3b8; --border:#202736; --accent:#5eead4;
     }
+    body.light-mode {
+      --bg:#f9fafb;
+      --panel:#ffffff;
+      --card:#f3f4f6;
+      --text:#020617;
+      --muted:#4b5563;
+      --border:#e5e7eb;
+      --accent:#2563eb;
+    }
+
     html,body{height:100%}
     html{scroll-behavior:smooth}
     body{
@@ -40,9 +50,29 @@
     .brand{ display:flex; align-items:center; gap:.65rem; font-weight:800; letter-spacing:.2px; }
     .dot{ width:10px; height:10px; border-radius:50%; background:var(--accent); box-shadow:0 0 18px var(--accent); }
     .brand a{ white-space:nowrap; }
-    .menu{ display:flex; gap:.6rem; flex-wrap:wrap; }
+    .menu{ display:flex; gap:.6rem; flex-wrap:wrap; align-items:center; }
     .menu a{ padding:.5rem .75rem; border-radius:10px; border:1px solid transparent; opacity:.9; }
     .menu a:hover{ border-color:var(--border); background:var(--panel); }
+
+    /* Theme toggle button */
+    .theme-toggle{
+      margin-left:.4rem;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:var(--card);
+      color:var(--muted);
+      width:36px;height:36px;
+      display:inline-flex;align-items:center;justify-content:center;
+      cursor:pointer;
+      transition:background .2s, color .2s, border-color .2s, transform .15s;
+    }
+    .theme-toggle:hover{
+      background:#1e293b;
+      color:#e5e7eb;
+      border-color:#334155;
+      transform:translateY(-1px);
+    }
+    .theme-toggle i{ font-size:15px; }
 
     /* ===== Generic UI ===== */
     section{ padding:56px 0; }
@@ -157,9 +187,6 @@
     @media (max-width:900px){ .contact-grid{ grid-template-columns:1fr } .contact-form .row{ grid-template-columns:1fr } }
     @media (max-width:640px){ .menu{ display:none } .grid-3,.grid-2{ grid-template-columns:1fr } }
 
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce){ .contact-icons a, .download-btn.pulse::after{ animation: none; } .download-btn{ transition: none; } }
-
     /* Social icon colors */
     .contact-icons a.email i{ color:#D44638; }
     .contact-icons a.linkedin i{ color:#0077B5; }
@@ -195,8 +222,12 @@
         <a href="#skills">Skills</a>
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
+        <a href="#case-studies">Case Studies</a>
         <a href="#education">Education</a>
         <a href="#contact">Contact</a>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle color theme">
+          <i class="fas fa-moon"></i>
+        </button>
       </nav>
     </div>
   </header>
@@ -402,6 +433,38 @@
       </div>
     </section>
 
+    <!-- ===== Case Studies ===== -->
+    <section id="case-studies">
+      <div class="container">
+        <h2>Case Studies</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Improving Transaction Processing Throughput</h3>
+            <p class="muted">
+              Designed an event-driven transaction microservice using Kafka and PostgreSQL to handle
+              bursts of traffic without overloading downstream systems.
+            </p>
+            <ul class="muted" style="margin-left:18px">
+              <li><strong>Problem:</strong> Synchronous request handling caused slow responses and backpressure at peak times.</li>
+              <li><strong>Solution:</strong> Introduced Kafka-based async processing with consumer groups, retries, and idempotent handlers.</li>
+              <li><strong>Impact:</strong> Improved perceived latency for clients and enabled smoother scaling under load.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Stabilizing Cloud Environments with Automation</h3>
+            <p class="muted">
+              Built Terraform and CI/CD workflows to provision and update application infrastructure on AWS consistently.
+            </p>
+            <ul class="muted" style="margin-left:18px">
+              <li><strong>Problem:</strong> Manual changes and inconsistent environments slowed releases and caused configuration drift.</li>
+              <li><strong>Solution:</strong> Created reusable Terraform modules and GitHub Actions pipelines for repeatable deployments.</li>
+              <li><strong>Impact:</strong> Reduced release friction and made it easier to roll out backend changes with confidence.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== Education ===== -->
     <section id="education">
       <div class="container">
@@ -528,7 +591,26 @@
   </footer>
 
   <script>
+    // year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // theme toggle with localStorage
+    const body = document.body;
+    const toggleBtn = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('theme');
+
+    if (savedTheme === 'light') {
+      body.classList.add('light-mode');
+      toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      const isLight = body.classList.toggle('light-mode');
+      toggleBtn.innerHTML = isLight
+        ? '<i class="fas fa-sun"></i>'
+        : '<i class="fas fa-moon"></i>';
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
   </script>
 </body>
 </html>
